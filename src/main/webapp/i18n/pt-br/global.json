@@ -14,6 +14,13 @@
         "orderItem": "Item de Pedido",
         "invoice": "Nota Fiscal",
         "shipment": "Entrega",
+        "product": "Product",
+        "productCategory": "Product Category",
+        "customer": "Customer",
+        "productOrder": "Product Order",
+        "orderItem": "Order Item",
+        "invoice": "Invoice",
+        "shipment": "Shipment",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

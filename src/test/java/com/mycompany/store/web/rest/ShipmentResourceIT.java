@@ -2,22 +2,30 @@ package com.mycompany.store.web.rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.mycompany.store.IntegrationTest;
 import com.mycompany.store.domain.Shipment;
 import com.mycompany.store.repository.ShipmentRepository;
+import com.mycompany.store.service.ShipmentService;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -27,6 +35,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Integration tests for the {@link ShipmentResource} REST controller.
  */
 @IntegrationTest
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 class ShipmentResourceIT {
@@ -48,6 +57,12 @@ class ShipmentResourceIT {
 
     @Autowired
     private ShipmentRepository shipmentRepository;
+
+    @Mock
+    private ShipmentRepository shipmentRepositoryMock;
+
+    @Mock
+    private ShipmentService shipmentServiceMock;
 
     @Autowired
     private EntityManager em;
@@ -152,6 +167,24 @@ class ShipmentResourceIT {
             .andExpect(jsonPath("$.[*].trackingCode").value(hasItem(DEFAULT_TRACKING_CODE)))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
             .andExpect(jsonPath("$.[*].details").value(hasItem(DEFAULT_DETAILS)));
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllShipmentsWithEagerRelationshipsIsEnabled() throws Exception {
+        when(shipmentServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restShipmentMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
+
+        verify(shipmentServiceMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllShipmentsWithEagerRelationshipsIsNotEnabled() throws Exception {
+        when(shipmentServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restShipmentMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
+
+        verify(shipmentServiceMock, times(1)).findAllWithEagerRelationships(any());
     }
 
     @Test

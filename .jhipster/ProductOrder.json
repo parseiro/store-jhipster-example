@@ -41,6 +41,7 @@
       "relationshipType": "one-to-many"
     },
     {
+      "otherEntityField": "email",
       "otherEntityName": "customer",
       "otherEntityRelationshipName": "order",
       "relationshipName": "customer",

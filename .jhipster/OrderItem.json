@@ -31,12 +31,14 @@
   "readOnly": false,
   "relationships": [
     {
+      "otherEntityField": "name",
       "otherEntityName": "product",
       "otherEntityRelationshipName": "orderItem",
       "relationshipName": "product",
       "relationshipType": "many-to-one"
     },
     {
+      "otherEntityField": "code",
       "otherEntityName": "productOrder",
       "otherEntityRelationshipName": "orderItem",
       "relationshipName": "order",

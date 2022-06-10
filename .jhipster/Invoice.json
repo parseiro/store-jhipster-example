@@ -50,6 +50,7 @@
       "relationshipType": "one-to-many"
     },
     {
+      "otherEntityField": "code",
       "otherEntityName": "productOrder",
       "otherEntityRelationshipName": "invoice",
       "relationshipName": "order",

@@ -3,6 +3,7 @@ package com.mycompany.store.web.rest;
 import static com.mycompany.store.web.rest.TestUtil.sameNumber;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -10,15 +11,22 @@ import com.mycompany.store.IntegrationTest;
 import com.mycompany.store.domain.OrderItem;
 import com.mycompany.store.domain.enumeration.OrderItemStatus;
 import com.mycompany.store.repository.OrderItemRepository;
+import com.mycompany.store.service.OrderItemService;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -28,6 +36,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Integration tests for the {@link OrderItemResource} REST controller.
  */
 @IntegrationTest
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 class OrderItemResourceIT {
@@ -49,6 +58,12 @@ class OrderItemResourceIT {
 
     @Autowired
     private OrderItemRepository orderItemRepository;
+
+    @Mock
+    private OrderItemRepository orderItemRepositoryMock;
+
+    @Mock
+    private OrderItemService orderItemServiceMock;
 
     @Autowired
     private EntityManager em;
@@ -187,6 +202,24 @@ class OrderItemResourceIT {
             .andExpect(jsonPath("$.[*].quantity").value(hasItem(DEFAULT_QUANTITY)))
             .andExpect(jsonPath("$.[*].totalPrice").value(hasItem(sameNumber(DEFAULT_TOTAL_PRICE))))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllOrderItemsWithEagerRelationshipsIsEnabled() throws Exception {
+        when(orderItemServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restOrderItemMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
+
+        verify(orderItemServiceMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllOrderItemsWithEagerRelationshipsIsNotEnabled() throws Exception {
+        when(orderItemServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restOrderItemMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
+
+        verify(orderItemServiceMock, times(1)).findAllWithEagerRelationships(any());
     }
 
     @Test

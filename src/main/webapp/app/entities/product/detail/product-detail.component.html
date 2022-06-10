@@ -42,7 +42,7 @@
         <dt><span jhiTranslate="storeApp.product.category">Category</span></dt>
         <dd>
           <div *ngIf="product.category">
-            <a [routerLink]="['/product-category', product.category?.id, 'view']">{{ product.category?.id }}</a>
+            <a [routerLink]="['/product-category', product.category?.id, 'view']">{{ product.category?.name }}</a>
           </div>
         </dd>
       </dl>

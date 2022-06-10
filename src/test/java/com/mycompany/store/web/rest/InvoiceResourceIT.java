@@ -3,6 +3,7 @@ package com.mycompany.store.web.rest;
 import static com.mycompany.store.web.rest.TestUtil.sameNumber;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -11,17 +12,24 @@ import com.mycompany.store.domain.Invoice;
 import com.mycompany.store.domain.enumeration.InvoiceStatus;
 import com.mycompany.store.domain.enumeration.PaymentMethod;
 import com.mycompany.store.repository.InvoiceRepository;
+import com.mycompany.store.service.InvoiceService;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -31,6 +39,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Integration tests for the {@link InvoiceResource} REST controller.
  */
 @IntegrationTest
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 class InvoiceResourceIT {
@@ -61,6 +70,12 @@ class InvoiceResourceIT {
 
     @Autowired
     private InvoiceRepository invoiceRepository;
+
+    @Mock
+    private InvoiceRepository invoiceRepositoryMock;
+
+    @Mock
+    private InvoiceService invoiceServiceMock;
 
     @Autowired
     private EntityManager em;
@@ -251,6 +266,24 @@ class InvoiceResourceIT {
             .andExpect(jsonPath("$.[*].paymentMethod").value(hasItem(DEFAULT_PAYMENT_METHOD.toString())))
             .andExpect(jsonPath("$.[*].paymentDate").value(hasItem(DEFAULT_PAYMENT_DATE.toString())))
             .andExpect(jsonPath("$.[*].paymentAmount").value(hasItem(sameNumber(DEFAULT_PAYMENT_AMOUNT))));
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllInvoicesWithEagerRelationshipsIsEnabled() throws Exception {
+        when(invoiceServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restInvoiceMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
+
+        verify(invoiceServiceMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllInvoicesWithEagerRelationshipsIsNotEnabled() throws Exception {
+        when(invoiceServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restInvoiceMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
+
+        verify(invoiceServiceMock, times(1)).findAllWithEagerRelationships(any());
     }
 
     @Test

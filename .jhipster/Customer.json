@@ -59,6 +59,7 @@
   "readOnly": false,
   "relationships": [
     {
+      "otherEntityField": "login",
       "otherEntityName": "user",
       "otherEntityRelationshipName": "customer",
       "ownerSide": true,

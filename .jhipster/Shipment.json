@@ -26,6 +26,7 @@
   "readOnly": false,
   "relationships": [
     {
+      "otherEntityField": "code",
       "otherEntityName": "invoice",
       "otherEntityRelationshipName": "shipment",
       "relationshipName": "invoice",
