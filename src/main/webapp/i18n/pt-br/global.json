@@ -7,6 +7,13 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entidades",
+        "product": "Produto",
+        "productCategory": "Categoria de Produto",
+        "customer": "Consumidor",
+        "productOrder": "Pediro de Produto",
+        "orderItem": "Item de Pedido",
+        "invoice": "Nota Fiscal",
+        "shipment": "Entrega",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
