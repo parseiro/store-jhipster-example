@@ -1,11 +1,11 @@
-id;placed_date;status;code
-1;2022-06-10T04:57:00;COMPLETED;Electronics
-2;2022-06-09T23:18:59;COMPLETED;payment PCI violet
-3;2022-06-10T09:47:52;CANCELLED;background out-of-the-box withdrawal
-4;2022-06-09T13:50:53;COMPLETED;Music real-time
-5;2022-06-09T21:55:02;CANCELLED;Hat
-6;2022-06-10T10:39:50;PENDING;solid navigating
-7;2022-06-09T20:35:36;PENDING;Toys maroon
-8;2022-06-10T09:25:10;COMPLETED;Developer
-9;2022-06-09T16:53:34;COMPLETED;Credit Soft Cotton
-10;2022-06-10T07:36:10;CANCELLED;contingency Bedfordshire
+id;placed_date;status;code;customer_id
+1;2022-06-10T04:57:00;COMPLETED;Electronics;1
+2;2022-06-09T23:18:59;COMPLETED;payment PCI violet;2
+3;2022-06-10T09:47:52;CANCELLED;background out-of-the-box withdrawal;1
+4;2022-06-09T13:50:53;COMPLETED;Music real-time;2
+5;2022-06-09T21:55:02;CANCELLED;Hat;1
+6;2022-06-10T10:39:50;PENDING;solid navigating;2
+7;2022-06-09T20:35:36;PENDING;Toys maroon;2
+8;2022-06-10T09:25:10;COMPLETED;Developer;1
+9;2022-06-09T16:53:34;COMPLETED;Credit Soft Cotton;2
+10;2022-06-10T07:36:10;CANCELLED;contingency Bedfordshire;2

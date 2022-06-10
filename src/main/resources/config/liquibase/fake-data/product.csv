@@ -1,11 +1,11 @@
-id;name;description;price;product_size;image;image_content_type
-1;Steel;Assistant;57374;GGG;../fake-data/blob/hipster.png;image/png
-2;support navigate;Chilean reboot Dynamic;70131;G;../fake-data/blob/hipster.png;image/png
-3;withdrawal THX Division;Metal;83023;G;../fake-data/blob/hipster.png;image/png
-4;Michigan throughput Union;intermediate initiative Generic;32770;G;../fake-data/blob/hipster.png;image/png
-5;Ball Small;Computer CFP orange;9548;G;../fake-data/blob/hipster.png;image/png
-6;mobile Vermont auxiliary;COM Implementation Awesome;52784;M;../fake-data/blob/hipster.png;image/png
-7;withdrawal invoice;Bike Shoes Center;20319;M;../fake-data/blob/hipster.png;image/png
-8;pixel methodical quantifying;rich South Forward;79521;M;../fake-data/blob/hipster.png;image/png
-9;Computer Arizona mobile;AGP lavender;71562;GG;../fake-data/blob/hipster.png;image/png
-10;grey solution;Massachusetts Ergonomic Ergonomic;5859;P;../fake-data/blob/hipster.png;image/png
+id;name;description;price;product_size;image;image_content_type;category_id
+1;Steel;Assistant;57374;GGG;../fake-data/blob/hipster.png;image/png;1
+2;support navigate;Chilean reboot Dynamic;70131;G;../fake-data/blob/hipster.png;image/png;2
+3;withdrawal THX Division;Metal;83023;G;../fake-data/blob/hipster.png;image/png;3
+4;Michigan throughput Union;intermediate initiative Generic;32770;G;../fake-data/blob/hipster.png;image/png;4
+5;Ball Small;Computer CFP orange;9548;G;../fake-data/blob/hipster.png;image/png;5
+6;mobile Vermont auxiliary;COM Implementation Awesome;52784;M;../fake-data/blob/hipster.png;image/png;6
+7;withdrawal invoice;Bike Shoes Center;20319;M;../fake-data/blob/hipster.png;image/png;7
+8;pixel methodical quantifying;rich South Forward;79521;M;../fake-data/blob/hipster.png;image/png;8
+9;Computer Arizona mobile;AGP lavender;71562;GG;../fake-data/blob/hipster.png;image/png;9
+10;grey solution;Massachusetts Ergonomic Ergonomic;5859;P;../fake-data/blob/hipster.png;image/png;10

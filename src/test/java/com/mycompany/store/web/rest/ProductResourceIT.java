@@ -9,6 +9,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.mycompany.store.IntegrationTest;
 import com.mycompany.store.domain.Product;
+import com.mycompany.store.domain.ProductCategory;
 import com.mycompany.store.domain.enumeration.Size;
 import com.mycompany.store.repository.ProductRepository;
 import com.mycompany.store.service.ProductService;
@@ -96,6 +97,16 @@ class ProductResourceIT {
             .productSize(DEFAULT_PRODUCT_SIZE)
             .image(DEFAULT_IMAGE)
             .imageContentType(DEFAULT_IMAGE_CONTENT_TYPE);
+        // Add required entity
+        ProductCategory productCategory;
+        if (TestUtil.findAll(em, ProductCategory.class).isEmpty()) {
+            productCategory = ProductCategoryResourceIT.createEntity(em);
+            em.persist(productCategory);
+            em.flush();
+        } else {
+            productCategory = TestUtil.findAll(em, ProductCategory.class).get(0);
+        }
+        product.setCategory(productCategory);
         return product;
     }
 
@@ -113,6 +124,16 @@ class ProductResourceIT {
             .productSize(UPDATED_PRODUCT_SIZE)
             .image(UPDATED_IMAGE)
             .imageContentType(UPDATED_IMAGE_CONTENT_TYPE);
+        // Add required entity
+        ProductCategory productCategory;
+        if (TestUtil.findAll(em, ProductCategory.class).isEmpty()) {
+            productCategory = ProductCategoryResourceIT.createUpdatedEntity(em);
+            em.persist(productCategory);
+            em.flush();
+        } else {
+            productCategory = TestUtil.findAll(em, ProductCategory.class).get(0);
+        }
+        product.setCategory(productCategory);
         return product;
     }
 

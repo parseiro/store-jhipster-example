@@ -30,7 +30,8 @@
       "otherEntityName": "invoice",
       "otherEntityRelationshipName": "shipment",
       "relationshipName": "invoice",
-      "relationshipType": "many-to-one"
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
     }
   ],
   "service": "serviceClass"

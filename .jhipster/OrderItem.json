@@ -35,14 +35,16 @@
       "otherEntityName": "product",
       "otherEntityRelationshipName": "orderItem",
       "relationshipName": "product",
-      "relationshipType": "many-to-one"
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
     },
     {
       "otherEntityField": "code",
       "otherEntityName": "productOrder",
       "otherEntityRelationshipName": "orderItem",
       "relationshipName": "order",
-      "relationshipType": "many-to-one"
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
     }
   ],
   "service": "serviceClass"

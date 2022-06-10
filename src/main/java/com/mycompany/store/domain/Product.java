@@ -51,7 +51,8 @@ public class Product implements Serializable {
     @Column(name = "image_content_type")
     private String imageContentType;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @NotNull
     @JsonIgnoreProperties(value = { "products" }, allowSetters = true)
     private ProductCategory category;
 

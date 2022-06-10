@@ -32,7 +32,7 @@ export class ProductUpdateComponent implements OnInit {
     productSize: [null, [Validators.required]],
     image: [],
     imageContentType: [],
-    category: [],
+    category: [null, Validators.required],
   });
 
   constructor(
