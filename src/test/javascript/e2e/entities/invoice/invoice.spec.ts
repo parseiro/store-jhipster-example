@@ -49,6 +49,7 @@ describe('Invoice e2e test', () => {
       invoiceUpdatePage.paymentMethodSelectLastOption(),
       invoiceUpdatePage.setPaymentDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
       invoiceUpdatePage.setPaymentAmountInput('5'),
+      invoiceUpdatePage.setCodeInput('code'),
       invoiceUpdatePage.orderSelectLastOption(),
     ]);
 
