@@ -13,6 +13,7 @@
         data-cy="entityCreateButton"
         class="btn btn-primary jh-create-entity create-product"
         [routerLink]="['/product/new']"
+        *jhiHasAnyAuthority="'ROLE_ADMIN'"
       >
         <fa-icon icon="plus"></fa-icon>
         <span jhiTranslate="storeApp.product.home.createLabel"> Create a new Product </span>
@@ -55,7 +56,7 @@
           </td>
           <td>{{ product.name }}</td>
           <td>{{ product.description }}</td>
-          <td>{{ product.price }}</td>
+          <td>{{ product.price | currency: 'BRL' }}</td>
           <td jhiTranslate="{{ 'storeApp.Size.' + product.productSize }}">{{ product.productSize }}</td>
           <td>
             <a *ngIf="product.image" (click)="openFile(product.image, product.imageContentType)">
@@ -81,6 +82,7 @@
               </button>
 
               <button
+                *jhiHasAnyAuthority="'ROLE_ADMIN'"
                 type="submit"
                 [routerLink]="['/product', product.id, 'edit']"
                 class="btn btn-primary btn-sm"
@@ -90,7 +92,13 @@
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
               </button>
 
-              <button type="submit" (click)="delete(product)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+              <button
+                *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                type="submit"
+                (click)="delete(product)"
+                class="btn btn-danger btn-sm"
+                data-cy="entityDeleteButton"
+              >
                 <fa-icon icon="times"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
               </button>
