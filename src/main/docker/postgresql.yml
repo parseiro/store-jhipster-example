@@ -3,8 +3,8 @@ version: '3.8'
 services:
   store-postgresql:
     image: postgres:14.3
-    # volumes:
-    #   - ~/volumes/jhipster/store/postgresql/:/var/lib/postgresql/data/
+    volumes:
+      - /var/lib/docker/volumes/base_store/_data:/var/lib/postgresql/data/
     environment:
       - POSTGRES_USER=store
       - POSTGRES_PASSWORD=
@@ -12,4 +12,10 @@ services:
     # If you want to expose these ports outside your dev PC,
     # remove the "127.0.0.1:" prefix
     ports:
-      - 127.0.0.1:5432:5432
+      - 5432:5432
+    networks:
+      - store-net
+
+networks:
+  store-net:
+    external: true
