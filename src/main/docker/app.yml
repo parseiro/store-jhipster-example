@@ -1,8 +1,8 @@
-# This configuration is intended for development purpose, it's **your** responsibility to harden it for production
 version: '3.8'
 services:
   store-postgresql:
     image: postgres:14.3
+    container_name: store-postgres
     volumes:
       - /var/lib/docker/volumes/base_store/_data:/var/lib/postgresql/data/
     environment:
@@ -14,7 +14,8 @@ services:
   #    networks:
   #      - store-net
   store-app:
-    image: store
+    image: leopinheiro1984/store
+    container_name: store
     environment:
       - _JAVA_OPTIONS=-Xmx512m -Xms256m
       - SPRING_PROFILES_ACTIVE=prod,api-docs
@@ -29,6 +30,3 @@ services:
 #    networks:
 #      - store-net
 
-networks:
-  store-net:
-    driver: bridge
